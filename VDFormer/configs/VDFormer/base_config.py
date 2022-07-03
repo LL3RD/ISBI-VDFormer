@@ -4,7 +4,7 @@ _base_ = [
 ]
 
 dataset_type = 'CocoDataset'
-data_root = 'DATASET_PATH'
+data_root = '/data/huangjunjia/VDFormer/'
 
 log_config = dict(
     interval=100, )
@@ -12,10 +12,10 @@ log_config = dict(
 data = dict(
     samples_per_gpu=1,
     workers_per_gpu=2,
-    train=dict(ann_file=data_root + 'annotations/ann_train.json',
-               img_prefix=data_root + 'train_slice/', ),
-    val=dict(ann_file=data_root + 'annotations/ann_test.json',
-             img_prefix=data_root + 'test_slice/', ),
-    test=dict(ann_file=data_root + 'annotations/ann_test.json',
-              img_prefix=data_root + 'test_slice/', )
+    train=dict(ann_file=data_root + 'infer.json',
+               img_prefix=data_root + 'infer/', ),
+    val=dict(ann_file=data_root + 'infer.json',
+               img_prefix=data_root + 'infer/', ),
+    test=dict(ann_file=data_root + 'infer.json',
+               img_prefix=data_root + 'infer/', ),
 )

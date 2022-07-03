@@ -1,5 +1,5 @@
 _base_ = [
-    '../VDFormer/base_config.py',
+    'base_config.py',
     '../_base_/models/cascade_mask_rcnn_swin_fpn.py',
 ]
 
