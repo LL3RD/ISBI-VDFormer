@@ -5,7 +5,6 @@ from mmcv.runner import auto_fp16
 import torch.nn.functional as F
 from .swin_fusion_layer_proposed import SwinFusionLayer
 import torch
-from ..utils import A3DConv
 import time
 
 @NECKS.register_module()

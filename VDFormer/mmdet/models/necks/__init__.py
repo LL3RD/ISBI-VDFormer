@@ -10,10 +10,8 @@ from .pafpn import PAFPN
 from .rfp import RFP
 from .yolo_neck import YOLOV3Neck
 from .fpn_proposed import FPN_proposed
-from .fpn_MULAN import FPN_MULAN
-from .fpn_nnformer import FPN_nnformer
 
 __all__ = [
     'FPN', 'BFP', 'ChannelMapper', 'HRFPN', 'NASFPN', 'FPN_CARAFE', 'PAFPN',
-    'NASFCOS_FPN', 'RFP', 'YOLOV3Neck', 'FPG', "FPN_proposed", "FPN_MULAN", "FPN_nnformer"
+    'NASFCOS_FPN', 'RFP', 'YOLOV3Neck', 'FPG', "FPN_proposed"
 ]
