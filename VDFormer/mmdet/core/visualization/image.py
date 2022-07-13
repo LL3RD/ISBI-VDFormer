@@ -316,3 +316,62 @@ def imshow_gt_det_bboxes(img,
         out_file=out_file,
         bbox_loc="BR")
     return img
+
+
+def imshow_pred_det_bboxes(img,
+                         result,
+                         class_names=None,
+                         score_thr=0.5,
+                         gt_bbox_color=(255, 191, 0),
+                         gt_text_color=(255, 191, 0),
+                         gt_mask_color=(255, 102, 61),
+                         det_bbox_color=(0, 10, 255),
+                         det_text_color=(0, 10, 255),
+                         det_mask_color=(0, 10, 255),
+                         thickness=2,
+                         font_size=13,
+                         win_name='',
+                         show=True,
+                         wait_time=0,
+                         out_file=None):
+
+    img = mmcv.imread(img)
+
+    if isinstance(result, tuple):
+        bbox_result, segm_result = result
+        if isinstance(segm_result, tuple):
+            segm_result = segm_result[0]  # ms rcnn
+    else:
+        bbox_result, segm_result = result, None
+
+    bboxes = np.vstack(bbox_result)
+    labels = [
+        np.full(bbox.shape[0], i, dtype=np.int32)
+        for i, bbox in enumerate(bbox_result)
+    ]
+    labels = np.concatenate(labels)
+
+    segms = None
+    if segm_result is not None and len(labels) > 0:  # non empty
+        segms = mmcv.concat_list(segm_result)
+        segms = mask_util.decode(segms)
+        segms = segms.transpose(2, 0, 1)
+
+    img = imshow_det_bboxes(
+        img,
+        bboxes,
+        labels,
+        segms=segms,
+        class_names=class_names,
+        score_thr=score_thr,
+        bbox_color=det_bbox_color,
+        text_color=det_text_color,
+        mask_color=det_mask_color,
+        thickness=thickness,
+        font_size=font_size,
+        win_name=win_name,
+        show=show,
+        wait_time=wait_time,
+        out_file=out_file,
+        bbox_loc="BR")
+    return img
